@@ -6,6 +6,8 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+//space complexity O(1) 
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
