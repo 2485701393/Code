@@ -1,0 +1,26 @@
+class Solution {
+public:
+//分为两部分，转换为两数相加
+    int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4) {
+        unordered_map<int,int> dmap;
+        for(int a:nums1)
+        {
+            for(int b:nums2)
+            {
+                dmap[a+b]++;
+            }
+        }
+        int count = 0;
+        for(int a:nums3)
+        {
+            for(int b:nums4)
+            {
+                if(dmap.find(0-(a+b))!=dmap.end())
+                {
+                    count+=dmap[0-(a+b)];
+                }
+            }
+        }
+        return count;
+    }
+};
