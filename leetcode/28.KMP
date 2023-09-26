@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int n = needle.size();
+        int next[n];
+        getNext(next,needle);
+        int j=-1;
+        for(int i=0;i<haystack.size();i++)
+        {
+            while(j>=0&&haystack[i]!=needle[j+1])
+                j=next[j];
+            if(haystack[i]==needle[j+1])
+                j++;
+            if(j==needle.size()-1)
+            {
+                return (i-needle.size()+1);
+            }
+        }
+        return -1;
+    }
+    //先求出前缀表
+    void getNext(int *next,const string& s)
+    {
+        int j=-1;
+        next[0]=j;
+        for(int i=1;i<s.size();i++)
+        {
+            while(j>=0&&s[i]!=s[j+1])
+            {
+                j=next[j]; //找到新加入最后一位后的字符串的最长前后缀，利用目前已经总结好的前缀表，有一丝递归的思想
+            }
+            if(s[i]==s[j+1])
+            {
+                j++;
+            }
+            next[i]=j;
+        }
+    }
+
+};
