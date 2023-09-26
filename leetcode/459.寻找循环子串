@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        int len=s.size();
+        int next[len];
+        int j=-1;
+        next[0]=-1;
+        for(int i = 1;i<len;i++)
+        {
+            while(j>=0&&s[i]!=s[j+1])
+            {
+                j=next[j];
+            }
+            if(s[i]==s[j+1])
+            {
+                j++;
+            }
+            next[i]=j;
+        }
+        //看前缀表，字符串的最长相等前后缀=next【len-1】；
+        //asdsdkajsdnjasdasd最长就是3，不可能有重复
+        //但asdasdasd最长为6，前6后6必然有一部分重叠，重叠则必然有循环子串
+        //故可用取余来判断是否有重叠
+        if(next[len-1]==-1||len==0)
+        return false;
+        int base = len-next[len-1]-1;
+        if(len%base)
+        return false;
+        else
+        return true;
+    }
+};
