@@ -1,0 +1,30 @@
+//既然运算符在运算数之后，所以可以使用栈结构
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> nao;
+        int i=0;
+        while(i<tokens.size())
+        {
+            if(tokens[i]=="+"||tokens[i]=="-"||tokens[i]=="*"||tokens[i]=="/")
+            {
+                int num1=nao.top();
+                nao.pop();
+                int num2=nao.top();
+                nao.pop();
+                int temp = 0;
+                if(tokens[i]=="+") temp=num1+num2;
+                else if(tokens[i]=="-") temp=num2-num1;
+                else if(tokens[i]=="*") temp=num1*num2;
+                else if(tokens[i]=="/") temp=num2/num1;
+                nao.push(temp);
+            }
+            else
+            {
+                nao.push(stoi(tokens[i]));
+            }
+            i++;
+        }
+        return nao.top();
+    }
+};
