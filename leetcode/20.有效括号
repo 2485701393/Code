@@ -1,0 +1,35 @@
+class Solution {
+//简单用栈判断符号有效性，混合运算的阉割版
+public:
+    bool comp(const char &a , const char &b)
+    {
+        if((a=='('&&b==')')||(a=='{'&&b=='}')||(a=='['&&b==']'))
+        return true;
+        else
+        return false;
+    }
+    bool isValid(string s) {
+        int len = s.size();
+        stack<char> st;
+        int i = 0;
+        while(i<len)
+        {
+            if(st.empty())
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                if(comp(st.top(),s[i]))
+                    st.pop();
+                else
+                    st.push(s[i]);
+            }
+            i++;
+        }
+        if(st.empty())
+        return true;
+        else
+        return false;
+    }
+};
