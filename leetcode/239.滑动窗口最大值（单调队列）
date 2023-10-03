@@ -1,0 +1,41 @@
+class Solution {
+public:
+//先设置一个单调队列，纪录最大值以及备用最大值
+    class myQueue
+    {
+        public:
+        deque<int> que;//自定义队列时，优先选用deque，两端都能push或pop，非常方便
+        void pop(int x)
+        {
+            if(!que.empty()&&x==que.front())
+            que.pop_front();
+        }
+        void push(int x)
+        {
+            while(!que.empty()&&x>que.back())
+            que.pop_back();
+            que.push_back(x);
+        }
+        int front()
+        {
+            return que.front();
+        }
+    };
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        myQueue q;
+        vector<int> ans;
+        for(int i = 0 ; i < k ; i++ )
+        {
+            q.push(nums[i]);
+        }
+        ans.push_back(q.front());
+        for(int i = k ; i < nums.size();i++)
+        {
+            q.pop(nums[i-k]);
+            q.push(nums[i]);
+            ans.push_back(q.front());
+        }
+        return ans;
+    }
+    
+};
