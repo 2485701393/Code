@@ -1,0 +1,28 @@
+//简单的通过双层循环实现
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int ans = 0;
+        for(int i=0;i<height.size();i++)
+        {
+            if(i==0||i==height.size()-1)
+            continue;
+            int left = height[i];
+            int right = height[i];
+            for(int j = i+1;j<height.size();j++)
+            {
+                if(height[j]>right)
+                right = height[j];
+            }
+            for(int j = i-1;j>=0;j--)
+            {
+                if(height[j]>left)
+                left = height[j];
+            }
+            int min = right>left?left:right;
+            if(min-height[i]>0)
+            ans+=min-height[i];
+        }
+        return ans;
+    }
+};
