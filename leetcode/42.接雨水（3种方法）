@@ -57,3 +57,28 @@ public:
         return ans;
     }
 };
+//按行数，单调栈
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        stack<int> s;
+        s.push(0);
+        int ans = 0;
+        for(int i = 1 ;i <height.size();i++)
+        {
+            while(!s.empty()&&height[i]>height[s.top()])
+            {
+                int mid = s.top();
+                s.pop();
+                if(!s.empty())
+                {
+                    int h = min(height[s.top()],height[i])-height[mid];
+                    int w = i - s.top() - 1;
+                    ans += h*w;
+                }
+                            }
+            s.push(i);                
+        }
+        return ans;
+    }
+};
