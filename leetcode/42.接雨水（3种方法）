@@ -1,4 +1,4 @@
-//简单的通过双层循环实现
+//简单的通过双层循环实现，超时力T_T
 class Solution {
 public:
     int trap(vector<int>& height) {
