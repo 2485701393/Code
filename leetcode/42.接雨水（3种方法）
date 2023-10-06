@@ -26,3 +26,34 @@ public:
         return ans;
     }
 };
+//用动态规划？
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        if(height.size()==2)
+        return 0;
+        vector<int> left(height.size(),0);
+        vector<int> right(height.size(),0);
+        int len = height.size();
+        left[0]=height[0];
+        for(auto i = 1;i<len;i++)
+        {
+            left[i]=height[i]>left[i-1]?height[i]:left[i-1];
+        }
+        right[len-1]=height[len-1];
+        for(int i=len-2;i>=0;i--)
+        {
+            right[i]=height[i]>right[i+1]?height[i]:right[i+1];
+        }
+        int ans = 0;
+        for(int i = 1 ;i <= len-2 ;i++)
+        {
+            int col = min(left[i],right[i])-height[i];
+            if(col >= 0 )
+            {
+                ans+=col;
+            }
+        }
+        return ans;
+    }
+};
