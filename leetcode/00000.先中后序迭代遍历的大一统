@@ -1,0 +1,100 @@
+//先是中序的，不一致的起源
+class Union{
+public:
+vector<int> inorderTraversal(TreeNode* root)
+{
+  vector<int>  ans;
+  stack<TreeNode*> st;
+  if(root)
+  st.push(root);
+  while(!st.empty())
+  {
+    TreeNode* temp = st.top();
+    if(temp!=nullptr)
+    {
+      st.pop();
+      if(temp->right)
+      st.push(temp->right);
+      st.push(temp);
+      st.push(nullptr);
+      if(temp->left)
+      st.push(temp->left);
+    }
+    else
+    {
+      st.pop();
+      int t = st.top()->val;
+      ans.push_back(t);
+      st.pop();
+    }
+  }
+  return ans;
+}
+}
+//先序与后序相似
+class Union{
+public:
+vector<int> preorderTraversal(TreeNode* root)
+{
+  vector<int>  ans;
+  stack<TreeNode*> st;
+  if(root)
+  st.push(root);
+  while(!st.empty())
+  {
+    TreeNode* temp = st.top();
+    if(temp!=nullptr)
+    {
+      st.pop();
+      
+      if(temp->right)
+      st.push(temp->right);
+      if(temp->left)
+      st.push(temp->left);
+      st.push(temp);
+      st.push(nullptr);
+    }
+    else
+    {
+      st.pop();
+      int t = st.top()->val;
+      ans.push_back(t);
+      st.pop();
+    }
+  }
+  return ans;
+}
+}
+
+class Union{
+public:
+vector<int> postorderTraversal(TreeNode* root)
+{
+  vector<int>  ans;
+  stack<TreeNode*> st;
+  if(root)
+  st.push(root);
+  while(!st.empty())
+  {
+    TreeNode* temp = st.top();
+    if(temp!=nullptr)
+    {
+      st.pop();
+      st.push(temp);
+      st.push(nullptr);
+      if(temp->left)
+      st.push(temp->left);
+      if(temp->right)
+      st.push(temp->right);
+    }
+    else
+    {
+      st.pop();
+      int t = st.top()->val;
+      ans.push_back(t);
+      st.pop();
+    }
+  }
+  return ans;
+}
+}
