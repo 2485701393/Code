@@ -1,0 +1,24 @@
+//错误版本，碰巧观察到规律，以为中序遍历就是对称的遍历方法，通过反转遍历出的数组与原数组比较判断是否对称是错误的，原因是忽略了二叉树形状不对称的情况
+class Solution {
+public:
+    vector<int> num;
+    bool isSymmetric(TreeNode* root) {
+        if (root)
+        inorder(root);
+        vector<int> num2(num);
+        reverse(num.begin(),num.end());
+        if(num==num2)
+        return true;
+        else
+        return false;
+    }
+    TreeNode* inorder(TreeNode* p)
+    {
+        if(p->left)
+        inorder(p->left);
+        num.push_back(p->val);
+        if(p->right)
+        inorder(p->right);
+        return p;
+    }
+};
