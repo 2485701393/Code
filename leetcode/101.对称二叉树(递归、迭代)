@@ -22,3 +22,25 @@ public:
         return p;
     }
 };
+//递归版本
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        return symmetric(root->left,root->right);
+    }
+    bool symmetric(TreeNode* leftN,TreeNode* rightN)
+    {
+        if(leftN&&!rightN)
+        return false;
+        else if(!leftN&&rightN)
+        return false;
+        else if(!leftN&&!rightN)
+        return true;
+        else if(leftN->val!=rightN->val)
+        return false;
+        else
+        {
+            return (symmetric(leftN->right,rightN->left)&&symmetric(leftN->left,rightN->right));
+        }
+    }
+};
